@@ -3,6 +3,9 @@ using Application.Services.Implementations;
 using Infrastructure.Context;
 using Infrastructure.Repositories.Abstractions;
 using Infrastructure.Repositories.Implementations;
+using Autofac.Extensions.DependencyInjection;
+using Autofac;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,16 +20,29 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>();
 
 // Inyeccion de depencia
-builder.Services.AddScoped<IEditorialRepository, EditorialRepository>();
+//builder.Services.AddScoped<IEditorialRepository, EditorialRepository>();
 
-builder.Services.AddScoped<IEditorialService, EditorialService>();
+// builder.Services.AddScoped<IEditorialService, EditorialService>();
 
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+// builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory()).ConfigureContainer<ContainerBuilder>(options =>
+{
+    options.RegisterAssemblyTypes(Assembly.Load("Infrastructure"))
+    .Where(t => t.Name.EndsWith("Repository"))
+    .AsImplementedInterfaces()
+    .InstancePerLifetimeScope();
+
+    options.RegisterAssemblyTypes(Assembly.Load("Application"))
+    .Where(t => t.Name.EndsWith("Service"))
+    .AsImplementedInterfaces()
+    .InstancePerLifetimeScope();
+});
+
+builder.Services.AddAutoMapper(Assembly.Load("Application"));
 
 
-
-
-var app = builder.Build();
+    var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
