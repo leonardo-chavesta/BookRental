@@ -1,7 +1,6 @@
-﻿namespace Utils
+﻿namespace Utils;
+public class Class1
 {
-    public class Class1
-    {
 
-    }
 }
+

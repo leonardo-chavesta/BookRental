@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
+    <None Remove="Microsoft.EntityFrameworkCore.Relational" />
+    <None Remove="Microsoft.EntityFrameworkCore" />
+    <None Remove="Context\" />
+    <None Remove="ModelMaps\" />
+    <None Remove="Repositories\" />
+    <None Remove="Repositories\Abstractions\" />
+    <None Remove="Repositories\Implementations\" />
+    <None Remove="Base\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Context\" />
+    <Folder Include="ModelMaps\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Repositories\Abstractions\" />
+    <Folder Include="Repositories\Implementations\" />
+    <Folder Include="Base\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+</Project>
