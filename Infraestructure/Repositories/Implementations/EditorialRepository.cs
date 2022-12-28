@@ -29,7 +29,7 @@ namespace Infrastructure.Repositories.Implementations
         //}
         /* con funcion flecha y ordendo que el ultimo regitro se muestre primero */
 
-        public async Task<IList<Editorial>> findAll() => await _context.Editoriales.OrderByDescending(e => e.Id).ToListAsync();
+        public async Task<IList<Editorial>> FindAll() => await _context.Editoriales.OrderByDescending(e => e.Id).ToListAsync();
        
 
 

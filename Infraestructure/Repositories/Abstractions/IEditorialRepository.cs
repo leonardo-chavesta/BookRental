@@ -9,6 +9,6 @@ namespace Infrastructure.Repositories.Abstractions
 {
     public interface IEditorialRepository
     {
-        Task<IList<Editorial>> findAll();
+        Task<IList<Editorial>> FindAll();
     }
 }
